@@ -81,3 +81,57 @@ Route::get ('bio/{param1?}/{param2?}/{param3?}/{param4?}/{param5?}', function ($
     return view('bio', compact('nama','alamat','jk','tb','bb'));
 });
 
+Route::get('testmodel', function () {
+    $query = App\Models\Post::all();
+    return $query;
+});
+
+Route::get('testmodel/{id}', function ($id) {
+    $query = App\Models\Post::find($id);
+    return $query;
+});
+
+Route::get('testmodel/{search}', function ($s) {
+    $query = App\Models\Post::where('title', 'like', "%$s%")
+        ->get();
+    return $query;
+});
+
+Route::get('testmodel-add', function () {
+    $query = new App\Models\Post();
+    $query->title = "Sholawat penghapus maksiat";
+    $query->content = "Loren ipsum sit amet dolor";
+    $query->save();
+    return $query;
+});
+
+Route::get('testmodel-delete/{id}', function ($id) {
+    $query = App\Models\Post::find($id);
+    $query->delete();
+    return redirect('/testmodel');
+});
+
+Route::get('barang', function () {
+    $query = App\Models\Barang::all();
+    return $query;
+});
+
+Route::get('pembelian', function () {
+    $query = App\Models\Pembelian::all();
+    return $query;
+});
+
+Route::get('pembeli', function () {
+    $query = App\Models\Pembeli::all();
+    return $query;
+});
+
+Route::get('pemesanan', function () {
+    $query = App\Models\Pemesanan::all();
+    return $query;
+});
+
+Route::get('suplier', function () {
+    $query = App\Models\Suplier::all();
+    return $query;
+});
